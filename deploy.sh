@@ -14,5 +14,5 @@ docker push razear/mega-electric-app:$SHA
 #deploying to fandogh cloud
 fandogh service apply -f ./inventory-nginx/nginx-deployment.yml  -p SHA=$SHA
 fandogh service apply -f ./invenory-mysql/mysql-deployment.yml -p SHA=$SHA
-fandogh service apply -f ./inventory-frontend/web-app-deployment.yml   -p SHA=$SHA
-fandogh service apply -f ./inventory-backend/app-deployment.yml  -p SHA=$SHA
+fandogh service apply -f ./inventory-web-app/web-app-deployment.yml   -p SHA=$SHA
+fandogh service apply -f ./inventory-app/app-deployment.yml  -p SHA=$SHA
