@@ -1,0 +1,12 @@
+[submodule "inventory-app"]
+	path = inventory-app
+	url = https://github.com/Raze-Arm/inventory-app
+[submodule "inventory-mysql"]
+	path = inventory-mysql
+	url = https://github.com/Raze-Arm/inventory-mysql
+[submodule "inventory-web-app"]
+	path = inventory-web-app
+	url = https://github.com/Raze-Arm/inventory-web-app
+[submodule "inventory-nginx"]
+	path = inventory-nginx
+	url = https://github.com/Raze-Arm/inventory-nginx
