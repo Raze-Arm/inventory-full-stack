@@ -15,9 +15,9 @@ before_install:
   - git submodule update --init --recursive
   - pip install fandogh-cli --upgrade
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t razear/inventory-app -f Dockerfile.dev ./inventory-backend
+  - docker build -t razear/inventory-app -f Dockerfile.dev ./inventory-app
   - mvn -DSPRING_PROFILES_ACTIVE=dev install  -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - docker build -t razear/inventory-web-app -f Dockerfile.dev ./inventory-forntend
+  - docker build -t razear/inventory-web-app-dev -f Dockerfile.dev ./inventory-web-app
 script:
   - mvn -DSPRING_PROFILES_ACTIVE=dev  test
   - mvn -DSPRING_PROFILES_ACTIVE=dev clean install
