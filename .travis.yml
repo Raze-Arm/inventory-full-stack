@@ -20,6 +20,7 @@ before_install:
   - docker build -t razear/inventory-web-app-dev -f ./inventory-web-app/Dockerfile.dev ./inventory-web-app
 script:
 #  - mvn -DSPRING_PROFILES_ACTIVE=dev  test
+  - cd ./inventory-app
   - mvn -DSPRING_PROFILES_ACTIVE=dev clean install
   - docker run -e CI=true razear/inventory-web-app-dev npm test
 
