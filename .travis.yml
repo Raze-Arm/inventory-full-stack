@@ -12,7 +12,7 @@ env:
 
 before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-  - git submodule foreach --recursive  update --init
+  - git submodule update --init --recursive
   - pip install fandogh-cli --upgrade
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker build -t razear/inventory-app -f ./inventory-app/Dockerfile.dev ./inventory-app
