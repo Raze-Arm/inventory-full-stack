@@ -22,6 +22,7 @@ script:
 #  - mvn -DSPRING_PROFILES_ACTIVE=dev  test
   - cd ./inventory-app
   - mvn -DSPRING_PROFILES_ACTIVE=dev clean install
+  - cd ..
   - docker run -e CI=true razear/inventory-web-app-dev npm test
 
 before_deploy:
