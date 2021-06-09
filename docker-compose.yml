@@ -1,29 +1,31 @@
 version: '3'
 services:
   mega-electric-mysql:
-#    image: 'razar/mega-electric-mysql:latest'
-    build:
-      dockerfile: Dockerfile
-      context: ./inventory-mysql
+    image: 'razear/mega-electric-mysql:latest'
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./inventory-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
   mega-electric-nginx:
-    image: 'razar/mega-electric-nginx:latest'
+    image: 'razear/mega-electric-nginx:latest'
     depends_on:
       - mega-electric-app
       - mega-electric-web-app
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./inventory-nginx
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./inventory-nginx
     ports:
     - '3050:80'
 
   mega-electric-app:
-    image: 'razar/mega-electric-app:latest'
-    build:
-      dockerfile: Dockerfile
-      context: ./inventory-app
+    image: 'razear/mega-electric-app:latest'
+    ports:
+      - '8080:8080'
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./inventory-app
     environment:
       - ALLOWED_ORIGINS=mega-electric-nginx
       - SPRING_PROFILES_ACTIVE=prod
@@ -35,9 +37,11 @@ services:
       - MYSQL_HOST=mega-electric-mysql
       - MYSQL_DB_NAME=inventory
   mega-electric-web-app:
-#    image: 'razar/mega-electric-web-app:latest'
-    build:
-      dockerfile: Dockerfile
-      context: ./inventory-web-app
+    image: 'razear/mega-electric-web-app:latest'
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./inventory-web-app
     environment:
-      - BACKEND_API=mega-electric-app/api/v1
+      - REACT_APP_BACKEND_API=mega-electric-app/api/v1
+    ports:
+      - '3000:3000'
