@@ -42,6 +42,6 @@ services:
 #    image: 'razear/mega-electric-web-app'
     build:
       args:
-        - BACKEND_API=http://localhost:3050/api/v1
+        - BACKEND_API=http://localhost:3050/api
       dockerfile: Dockerfile
       context: ./inventory-web-app
