@@ -1,35 +1,40 @@
+# if you plan to build images in your system , you can  remove/comment image tags and
+# uncomment rest .
 version: '3'
 services:
   mega-electric-mysql:
-    image: 'razear/mega-electric-mysql'
-#    build:
-#      dockerfile: Dockerfile
-#      context: ./inventory-mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=password
+    container_name: mega-electric-mysql
+    image: 'razear/mega-electric-mysql-dev'
+  #    build:
+  #      dockerfile: Dockerfile
+  #      context: ./inventory-mysql
+  #    environment:
+  #      - MYSQL_ROOT_PASSWORD=password
 
   mega-electric-nginx:
-    image: 'razear/mega-electric-nginx'
+    container_name: 'mega-electric-nginx'
+    #    image: 'razear/mega-electric-nginx'
     depends_on:
       - mega-electric-app
       - mega-electric-web-app
     restart: always
-#    build:
-#      dockerfile: Dockerfile
-#      context: ./inventory-nginx
+    build:
+      dockerfile: Dockerfile
+      context: ./inventory-nginx
     ports:
-    - '3050:80'
+      - '3050:80'
 
   mega-electric-app:
-    image: 'razear/mega-electric-app'
+    container_name: mega-electric-app
+    image: 'razear/mega-electric-app-dev'
     depends_on:
       - mega-electric-mysql
     restart: always
-#    build:
-#      dockerfile: Dockerfile
-#      context: ./inventory-app
+    #    build:
+    #      dockerfile: Dockerfile
+    #      context: ./inventory-backend
     environment:
-      - ALLOWED_ORIGINS=mega-electric-nginx
+      - ALLOWED_ORIGINS=http://localhost:3050
       - SPRING_PROFILES_ACTIVE=prod
       - JWT_TOKEN=CoUeBmdPP1ueTrcfupsxdBK9dmAx9GJBUrEkBHZhwhjdw
       - JWT_TOKEN_EXPIRE=10
@@ -39,9 +44,11 @@ services:
       - MYSQL_HOST=mega-electric-mysql
       - MYSQL_DB_NAME=inventory
   mega-electric-web-app:
-#    image: 'razear/mega-electric-web-app'
-    build:
-      args:
-        - BACKEND_API=http://localhost:3050/api
-      dockerfile: Dockerfile
-      context: ./inventory-web-app
+    container_name: mega-electric-web-app
+    image: 'razear/mega-electric-web-app-dev'
+#    build:
+#      args:
+#        - BACKEND_API=http://localhost:3050/api
+#        - WEBSOCKET_API=ws://localhost:3050/api
+#      dockerfile: Dockerfile
+#      context: ./inventory-frontend
